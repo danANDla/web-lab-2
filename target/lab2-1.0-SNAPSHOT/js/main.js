@@ -59,74 +59,81 @@ function validation(){
 $( document ).ready(function() {
     $((document).getElementById('submit-btn')).on('click', function (event){
         event.preventDefault();
-        submit();
+
+        let r = $("input[name='r-input']:checked").val();
+        if (typeof r == 'undefined') {
+            r = '';
+        }
+        let rval = r.toString();
+
+        if(canvasflag){
+            let xval = xsend.toString();
+            let yval = ysend.toString();
+            submit(xval,yval,rval, "canvas");
+            canvasflag=false;
+        }
+        else{
+            let xval = x.value;
+            let yval = y.value;
+            if(validation()){
+                submit(xval,yval,rval, "form");
+            }
+        }
     })
 })
 
 
 
-function submit(){
-    if(validation()){
-        console.log('submitted');
-        let r = $("input[name='r-input']:checked").val();
-        if (typeof r == 'undefined') {
-            r = '';
-        }
-        let xval = x.value;
-        let yval = y.value;
-        let rval = r.toString();
-        $.ajax({
-            url: "ControllerServlet",
-            type: "GET",
-            data: {
-                xval: xval,
-                yval: yval,
-                rval: rval
-            },
-            async: true,
-            cache: false,
-            success: function (response){
-                if(response === "invalid values"){
-                    document.getElementById("x-invite").style.color = "#AC2205";
-                    document.getElementById("x-invite").style.fontWeight = "normal";
+function submit(xval,yval,rval, mode){
+    $.ajax({
+        url: "ControllerServlet",
+        type: "GET",
+        data: {
+            xval: xval,
+            yval: yval,
+            rval: rval,
+            mode: mode
+        },
+        async: true,
+        cache: false,
+        success: function (response){
+            console.log('succeed in request');
+            if(response === "invalid values"){
+                document.getElementById("x-invite").style.color = "#AC2205";
+                document.getElementById("x-invite").style.fontWeight = "normal";
 
-                    document.getElementById("y-invite").style.color = "#AC2205";
-                    document.getElementById("y-invite").style.fontWeight = "normal";
+                document.getElementById("y-invite").style.color = "#AC2205";
+                document.getElementById("y-invite").style.fontWeight = "normal";
 
-                    document.getElementById("r-invite").style.color = "#AC2205";
-                    document.getElementById("r-invite").style.fontWeight = "normal";
-                }
-                else{
-                    $('html').html(response);
-                    console.log('success request');
-                    let msg = "";
-                    $('#post').html(msg);
-                }
-            },
-            error: function (jqXHR, exception) {
-                let msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status == 404) {
-                    msg = 'Requested page not found [404]';
-                } else if (jqXHR.status == 500) {
-                    msg = 'Internal Server Error [500]';
-                } else if (exception === 'parsererror') {
-                    msg = 'Requested JSON parse failed';
-                } else if (exception === 'timeout') {
-                    msg = 'Time out error';
-                } else if (exception === 'abort') {
-                    msg = 'Ajax request aborted';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                }
+                document.getElementById("r-invite").style.color = "#AC2205";
+                document.getElementById("r-invite").style.fontWeight = "normal";
+            }
+            else{
+                $('html').html(response);
+                let msg = "";
                 $('#post').html(msg);
-            },
-        })
-    }
-    else{
-        console.log('invalid');
-    }
+            }
+        },
+        error: function (jqXHR, exception) {
+            let msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+                msg = 'Requested page not found [404]';
+            } else if (jqXHR.status == 500) {
+                msg = 'Internal Server Error [500]';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            $('#post').html(msg);
+        },
+    })
 }
 
 //-----------------------------clear table--------------------------------
@@ -139,18 +146,50 @@ $( document ).ready(function() {
 })
 
 function clear(){
-
+    $.ajax({
+        url: "ControllerServlet",
+        type: "GET",
+        data: {
+            mode: "clear"
+        },
+        async: true,
+        cache: false,
+        success: function (response){
+            if(response === "table is empty"){
+                document.getElementById("result-table-body").innerHTML = "";
+            }
+        },
+        error: function (jqXHR, exception) {
+            let msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+                msg = 'Requested page not found [404]';
+            } else if (jqXHR.status == 500) {
+                msg = 'Internal Server Error [500]';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            $('#post').html(msg);
+        },
+    })
 }
 
-//-----------------------------restore table--------------------------------
-$(document).ready(function () {
-    restore();
-    console.log('restored');
-})
-
-function restore(){
-
-}
+// //-----------------------------restore table--------------------------------
+// $(document).ready(function () {
+//     restore();
+//     console.log('restored');
+// })
+//
+// function restore(){
+//
+// }
 
 //-----------------------------reset--------------------------------
 $( document ).ready(function() {

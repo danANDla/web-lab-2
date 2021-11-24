@@ -19,6 +19,19 @@ public class TableBean {
     }
 
     public ArrayList<point> getHitlist() {
-        return hitlist;
+        return this.hitlist;
+    }
+
+    public ArrayList<point> getDrawlist() {
+        int lastr=-1;
+        ArrayList<point> drawlist = new ArrayList<>();
+
+        if(this.hitlist.size()>0) lastr=this.hitlist.get(this.hitlist.size()-1).getR();
+        for(point shot : this.hitlist){
+            if(shot.getR()==lastr){
+                drawlist.add(shot);
+            }
+        }
+        return drawlist;
     }
 }

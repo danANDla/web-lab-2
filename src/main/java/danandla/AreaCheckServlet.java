@@ -13,7 +13,7 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         float x = Float.parseFloat(req.getParameter("xval"));
-        int y = Integer.parseInt(req.getParameter("yval"));
+        float y = Float.parseFloat(req.getParameter("yval"));
         int r = Integer.parseInt(req.getParameter("rval"));
 
         HttpSession session = req.getSession();
@@ -23,7 +23,7 @@ public class AreaCheckServlet extends HttpServlet {
         reqDispatcher.forward(req, resp);
     }
 
-    private boolean hit(float x, int y, int r) {
+    private boolean hit(float x, float y, int r) {
         float epsilon = 0.000000001f;
 
         boolean inSquare = false;
@@ -34,7 +34,7 @@ public class AreaCheckServlet extends HttpServlet {
                 && (y < r || Math.abs(y - r) <= epsilon) && (y > 0 || Math.abs(y) <= epsilon)) {
             inSquare = true;
         }
-        if((x<-r || Math.abs(x-(-r))<=epsilon) && (x<0 || Math.abs(x)<=epsilon)
+        if((x>-r || Math.abs(x-(-r))<=epsilon) && (x<0 || Math.abs(x)<=epsilon)
                 && (y<(0.5f*(x+r))|| Math.abs(y-(0.5f*(x+r)))<=epsilon) && (y>0 || Math.abs(y)<=epsilon)){
             inTriangle = true;
         }

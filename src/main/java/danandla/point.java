@@ -2,14 +2,14 @@ package danandla;
 
 public class point {
     private float x;
-    private int y;
+    private float y;
     private int r;
     private boolean hit;
 
     public point(){
 
     }
-    public point(float x, int y, int r, boolean hit) {
+    public point(float x, float y, int r, boolean hit) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -24,11 +24,11 @@ public class point {
         this.x = x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(float y) {
         this.y = y;
     }
 

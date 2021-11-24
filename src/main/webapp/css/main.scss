@@ -45,18 +45,12 @@ table[class=contentTable]{
 .svg-container {
   display: inline-block;
   position: relative;
-  width: 50%;
-  padding-bottom: 50%;
   vertical-align: middle;
   overflow: hidden;
 }
-.svg-content {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
+#responsive-canvas {
+  width: 100%;
 }
-
 .formCell{
   width: 40%;
 }

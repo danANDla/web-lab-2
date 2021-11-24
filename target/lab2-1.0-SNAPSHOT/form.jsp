@@ -9,13 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en"  xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8 ">
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="css/main.css">
     <title>lab 2</title>
-
-
 </head>
-<body>
+<body onload="init();">
 
 <div class="box">
     <section class="header">
@@ -28,7 +26,7 @@
             <tr>
                 <td class="imageCell">
                     <div class="parent-svg-container">
-                        <div class="svg-container"><object data="img/graph.png" width="100%" height="100%" class="svg-content"></object></div>
+                        <div class="svg-container"><canvas id="responsive-canvas"></canvas></div>
                     </div>
                 </td>
                 <td rowspan="2" class="responseCell">
@@ -49,7 +47,7 @@
                                     <%for(point shot : pointslist){%>
                                         <tr class="ishit-<%=shot.isHit()%>">
                                             <td class="res-table-X-clmn"><%=String.format("%.4f", shot.getX())%></td>
-                                            <td class="res-table-X-clmn"><%=shot.getY()%></td>
+                                            <td class="res-table-X-clmn"><%=String.format("%.4f", shot.getY()%></td>
                                             <td class="res-table-X-clmn"><%=shot.getR()%></td>
                                         </tr>
                                     <%}%>
@@ -121,6 +119,7 @@
     </section>
 </div>
 </body>
+<script type="text/javascript" src="js/canvas.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 </html>
