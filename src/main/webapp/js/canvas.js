@@ -17,29 +17,39 @@ function init() {
     }, false);
 }
 
-function draw(posx, posy) {
-    let context = canvas.getContext("2d");
-    context.fillStyle = "#000000";
-    context.beginPath();
-    context.arc(posx, posy, 2, 0, 2 * Math.PI);
-    context.fill();
-    context.closePath();
+function draw(posx, posy, color) {
+    let ctx = canvas.getContext("2d");
+    let img = new Image();
+    img.src = "./img/graph.png";
+    img.onload = function() {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(posx, posy, 2, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+    }
 }
 
-function coord(){
+function coord(x, y, r, hit){
     canvas = document.getElementById('responsive-canvas');
-    let x = document.getElementById("x-input").value;
-    let y = document.getElementById("y-input").value;
-    let r = $("input[name='r-input']:checked").val();
-    x=parseFloat(x,10);
-    y=parseInt(y,10);
+    x=parseFloat(x);
+    y=parseFloat(y);
     r=parseInt(r,10);
+    console.log(x,y,r);
     let offsetx=(canvas.width*166)/350;
     let offsety=(canvas.height*185)/350;
     let posx=offsetx+x/r*146/350*canvas.width;
     let posy=offsety-y/r*146/350*canvas.width;
-    console.log(posx, posy);
-    draw(posx,posy);
+    let color;
+    if(hit === true){
+        color = "#59ab42";
+    }
+    else{
+        color = "#ab2a3d";
+        console.log("fuck");
+    }
+    draw(posx,posy,color);
+    console.log(posx, posy, hit);
 }
 
 function mouse(e){
@@ -63,7 +73,7 @@ function mouse(e){
         ysend=-(posy-offsety)*r*350/(146*canvas.width);
         console.log(xsend, ysend);
         canvasflag = true;
-        draw(posx,posy);
+        draw(posx,posy,"#000000");
     }
 }
 

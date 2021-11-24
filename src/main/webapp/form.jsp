@@ -12,9 +12,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/main.css">
     <title>lab 2</title>
+    <script type="text/javascript" src="js/canvas.js"></script>
 </head>
-<body onload="init();">
-
+<body>
 <div class="box">
     <section class="header">
         <span> Алексеев Даниил </span> P3233 <br>
@@ -25,9 +25,10 @@
         <table class="contentTable">
             <tr>
                 <td class="imageCell">
-                    <div class="parent-svg-container">
+                    <div class="parent-svg-container" >
                         <div class="svg-container"><canvas id="responsive-canvas"></canvas></div>
                     </div>
+                    <script>init();</script>
                 </td>
                 <td rowspan="2" class="responseCell">
                     <div class="table-container">
@@ -43,13 +44,16 @@
                             <%if(request.getSession().getAttribute("table")!=null){%>
                                 <jsp:useBean id="table" class="danandla.TableBean" scope="session"/>
                                     <%ArrayList<point> pointslist = table.getHitlist();
-                                    int size = pointslist.size();%>
+                                    ArrayList<point> drawlist = table.getDrawlist();%>
                                     <%for(point shot : pointslist){%>
                                         <tr class="ishit-<%=shot.isHit()%>">
                                             <td class="res-table-X-clmn"><%=String.format("%.4f", shot.getX())%></td>
-                                            <td class="res-table-X-clmn"><%=String.format("%.4f", shot.getY()%></td>
+                                            <td class="res-table-X-clmn"><%=String.format("%.4f", shot.getY())%></td>
                                             <td class="res-table-X-clmn"><%=shot.getR()%></td>
                                         </tr>
+                                    <%}%>
+                                    <%for(point shot : drawlist){%>
+                                        <script>coord(<%=String.valueOf(shot.getX())%>, <%=String.valueOf(shot.getY())%>, <%=String.valueOf(shot.getR())%>, <%=String.valueOf(shot.isHit())%>);</script>
                                     <%}%>
                             <%}%>
                             </tbody>
@@ -119,7 +123,6 @@
     </section>
 </div>
 </body>
-<script type="text/javascript" src="js/canvas.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 </html>
