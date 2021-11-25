@@ -19,24 +19,25 @@
 <div class="box">
     <section class="hero">
         <div class="image">
-            <div class="parent-svg-container">
-                <div class="svg-container"><object data="img/graph.png" width="100%" height="100%" class="svg-content"></object></div>
-            </div>
+<%--            <div class="parent-svg-container">--%>
+<%--                <div class="svg-container"><canvas id="responsive-canvas"></canvas></div>--%>
+<%--            </div>--%>
+<%--            <script>resultinit();</script>--%>
         </div>
-
-        <div class="not-image">
+        <jsp:useBean id="table" class="danandla.TableBean" scope="session"/>
+        <%
+            ArrayList<point> pointslist = table.getHitlist();
+            int size = pointslist.size();
+            point shot = pointslist.get(size-1);
+            String color = shot.getHitColor();
+        %>
+        <div class="not-image" style="background: <%=color%>">
             <div class="btns-block">
                 <form action="ControllerServlet">
                     <div class="submit-btn"><input type="submit" value="back to form" id="submit-btn"></div>
                 </form>
             </div>
             <div class="data-block">
-                <jsp:useBean id="table" class="danandla.TableBean" scope="session"/>
-                <%
-                    ArrayList<point> pointslist = table.getHitlist();
-                    int size = pointslist.size();
-                    point shot = pointslist.get(size-1);
-                %>
                 <div class="x-val">X:&nbsp&nbsp&nbsp <%=shot.getX()%></div>
                 <div class="y-val">Y:&nbsp&nbsp&nbsp <%=shot.getY()%></div>
                 <div class="r-val">R:&nbsp&nbsp&nbsp <%=shot.getR()%></div>

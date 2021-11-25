@@ -32,28 +32,14 @@ html, body{
   padding: 1%;
   font-size: 20px;
 }
-
-.image{
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  background: white;
-  width: 70%;
-}
-
 .svg-container {
   display: inline-block;
   position: relative;
-  width: 50%;
-  padding-bottom: 50%;
   vertical-align: middle;
   overflow: hidden;
 }
-.svg-content {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
+#responsive-result-canvas {
+  width: 100%;
 }
 
 .not-image{
@@ -66,7 +52,7 @@ html, body{
   margin-right: auto;
   height: fit-content;
   width: 70%;
-  background: #292929;
+  //background: #292929;
   .btns-block{
     text-align: left;
     display: inline;

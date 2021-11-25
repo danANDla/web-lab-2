@@ -47,4 +47,9 @@ public class point {
     public void setHit(boolean hit) {
         this.hit = hit;
     }
+
+    public String getHitColor(){
+        if(this.isHit()) return "#59ab42";
+        else return "#ab2a3d";
+    }
 }

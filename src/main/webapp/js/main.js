@@ -1,8 +1,7 @@
-var x = document.getElementById("x-input");
-var y = document.getElementById("y-input");
-
 //-----------------------------validation--------------------------------
 function validation(){
+    let x = document.getElementById("x-input");
+    let y = document.getElementById("y-input");
     console.log('validation func');
     let r = $("input[name='r-input']:checked").val();
     if (typeof r == 'undefined') {
@@ -57,29 +56,31 @@ function validation(){
 
 //-----------------------------submit--------------------------------
 $( document ).ready(function() {
-    $((document).getElementById('submit-btn')).on('click', function (event){
-        event.preventDefault();
-
-        let r = $("input[name='r-input']:checked").val();
-        if (typeof r == 'undefined') {
-            r = '';
-        }
-        let rval = r.toString();
-
-        if(canvasflag){
-            let xval = xsend.toString();
-            let yval = ysend.toString();
-            submit(xval,yval,rval, "canvas");
-            canvasflag=false;
-        }
-        else{
-            let xval = x.value;
-            let yval = y.value;
-            if(validation()){
-                submit(xval,yval,rval, "form");
+    if((document).getElementById('submit-btn') != null) {
+        $((document).getElementById('submit-btn')).on('click', function (event) {
+            event.preventDefault();
+            let r = $("input[name='r-input']:checked").val();
+            if (typeof r == 'undefined') {
+                r = '';
             }
-        }
-    })
+            let rval = r.toString();
+
+            if (canvasflag) {
+                let xval = xsend.toString();
+                let yval = ysend.toString();
+                submit(xval, yval, rval, "canvas");
+                canvasflag = false;
+            } else {
+                let x = document.getElementById("x-input");
+                let y = document.getElementById("y-input");
+                let xval = x.value;
+                let yval = y.value;
+                if (validation()) {
+                    submit(xval, yval, rval, "form");
+                }
+            }
+        })
+    }
 })
 
 
@@ -138,14 +139,17 @@ function submit(xval,yval,rval, mode){
 
 //-----------------------------clear table--------------------------------
 $( document ).ready(function() {
-    $((document).getElementById('clear-btn')).on('click', function (event){
-        event.preventDefault();
-        clear();
-        console.log('cleared');
-    })
+    if((document).getElementById('clear-btn')!=null) {
+        $((document).getElementById('clear-btn')).on('click', function (event) {
+            event.preventDefault();
+            clear();
+            console.log('cleared');
+        })
+    }
 })
 
 function clear(){
+    init();
     $.ajax({
         url: "ControllerServlet",
         type: "GET",
@@ -193,15 +197,19 @@ function clear(){
 
 //-----------------------------reset--------------------------------
 $( document ).ready(function() {
-    $((document).getElementById('reset-btn')).on('click', function (event){
-        event.preventDefault();
-        reset();
-        console.log('resetted');
-    })
+    if((document).getElementById('reset-btn')!=null) {
+        $((document).getElementById('reset-btn')).on('click', function (event) {
+            event.preventDefault();
+            reset();
+            console.log('resetted');
+        })
+    }
 })
 
 function reset(){
     $("input[name='r-input']:checked").prop('checked', false);
+    let x = document.getElementById("x-input");
+    let y = document.getElementById("y-input");
     x.value = '';
     y.value = '';
     document.getElementById("x-invite").style.color = "white";
