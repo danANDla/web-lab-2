@@ -1,12 +1,5 @@
-<%@ page import="danandla.TableBean" %>
 <%@ page import="danandla.point" %>
-<%@ page import="java.util.ArrayList" %><%--
-  Created by IntelliJ IDEA.
-  User: dan20
-  Date: 19.11.2021
-  Time: 16:16
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html lang="en">
@@ -19,10 +12,6 @@
 <div class="box">
     <section class="hero">
         <div class="image">
-<%--            <div class="parent-svg-container">--%>
-<%--                <div class="svg-container"><canvas id="responsive-canvas"></canvas></div>--%>
-<%--            </div>--%>
-<%--            <script>resultinit();</script>--%>
         </div>
         <jsp:useBean id="table" class="danandla.TableBean" scope="session"/>
         <%
