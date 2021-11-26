@@ -1,11 +1,5 @@
 <%@ page import="danandla.point" %>
-<%@ page import="java.util.ArrayList" %><%--
-  Created by IntelliJ IDEA.
-  User: dan20
-  Date: 12.11.2021
-  Time: 0:21
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en"  xmlns="http://www.w3.org/1999/html">
 <head>

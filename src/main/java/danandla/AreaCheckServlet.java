@@ -12,6 +12,13 @@ import java.util.ArrayList;
 public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getSession().getAttribute("table") == null || req.getParameter("xval") == null
+                || req.getParameter("yval") == null || req.getParameter("rval") == null){
+            req.setAttribute("areamsg", "novalues");
+            RequestDispatcher reqDispatcher = req.getRequestDispatcher("result.jsp");
+            reqDispatcher.forward(req, resp);
+        }
+
         float x = Float.parseFloat(req.getParameter("xval"));
         float y = Float.parseFloat(req.getParameter("yval"));
         int r = Integer.parseInt(req.getParameter("rval"));
