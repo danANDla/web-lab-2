@@ -24,7 +24,7 @@ function validation(){
         document.getElementById("y-invite").style.color = "white";
         document.getElementById("y-invite").style.fontWeight = "300";
     }
-    if (x.value === '' || x.value>30 || x.value<-3 || isNaN(x.value)){
+    if (x.value === '' || x.value>3 || x.value<-3 || isNaN(x.value)){
         x_flag = false;
         if(x.value === ''){
             document.getElementById("x-invite").style.color = "#AC2205";

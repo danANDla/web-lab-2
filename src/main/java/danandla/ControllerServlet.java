@@ -52,7 +52,8 @@ public class ControllerServlet extends HttpServlet {
                 ;
             }
             else{
-                if(!x.matches("-?0{1}(\\.0+)?")&&(x.matches("-?[0-2]{1}(\\.\\d+)?") || x.matches("-?3{1}") || x.matches("0{1}")) ){
+                if(!x.matches("-?0{1}(\\.0+)?")&&(x.matches("-?[0-2]{1}(\\.\\d+)?") || x.matches("-?3{1}"))
+                 || (x.matches("0{1}(\\.0+)?"))){
                     xflag = true;
                 }
                 if(y.matches("-?4{1}") || y.matches("-?3{1}") || y.matches("-?2{1}") || y.matches("-?1{1}") || y.matches("0{1}")){

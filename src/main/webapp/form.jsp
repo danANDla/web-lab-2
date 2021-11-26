@@ -41,8 +41,8 @@
                                     ArrayList<point> drawlist = table.getDrawlist();%>
                                     <%for(point shot : pointslist){%>
                                         <tr class="ishit-<%=shot.isHit()%>">
-                                            <td class="res-table-X-clmn"><%=String.format("%.4f", shot.getX())%></td>
-                                            <td class="res-table-X-clmn"><%=String.format("%.4f", shot.getY())%></td>
+                                            <td class="res-table-X-clmn"><%=String.format("%.7f", shot.getX())%></td>
+                                            <td class="res-table-X-clmn"><%=String.format("%.7f", shot.getY())%></td>
                                             <td class="res-table-X-clmn"><%=shot.getR()%></td>
                                         </tr>
                                     <%}%>
@@ -53,7 +53,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <%String servlstmsg = (String) request.getAttribute("validation");
+                    <%String servlstmsg = (String) request.getAttribute("msg");
                     if(servlstmsg != null){%>
                         <div class="msgFromServlet"><span><%=servlstmsg%></span></div>
                     <%}%>
